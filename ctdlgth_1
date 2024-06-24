@@ -1,0 +1,249 @@
+// bài 1 
+// Định nghĩa một nút trong danh sách liên kết đơn
+class Node {
+    int data;
+    Node next;
+    
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+
+// Định nghĩa một danh sách liên kết đơn
+class LinkedList {
+    Node head;
+    
+    // 1. Thêm một nút vào đầu danh sách
+    void addToHead(int x) {
+        Node newNode = new Node(x);
+        newNode.next = head;
+        head = newNode;
+    }
+    
+    // 2. Thêm một nút vào cuối danh sách
+    void addToTail(int x) {
+        Node newNode = new Node(x);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node last = head;
+        while (last.next != null) {
+            last = last.next;
+        }
+        last.next = newNode;
+    }
+    
+    // 3. Thêm một nút sau nút p
+    void addAfter(Node p, int x) {
+        if (p == null) {
+            return;
+        }
+        Node newNode = new Node(x);
+        newNode.next = p.next;
+        p.next = newNode;
+    }
+    
+    // 4. Duyệt và hiển thị các nút trong danh sách
+    void traverse() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+    
+    // 5. Xóa nút đầu và trả về giá trị của nó
+    int deleteFromHead() {
+        if (head == null) {
+            return -1;
+        }
+        int value = head.data;
+        head = head.next;
+        return value;
+    }
+    
+    // 6. Xóa nút cuối và trả về giá trị của nó
+    int deleteFromTail() {
+        if (head == null) {
+            return -1;
+        }
+        if (head.next == null) {
+            int value = head.data;
+            head = null;
+            return value;
+        }
+        Node current = head;
+        while (current.next.next != null) {
+            current = current.next;
+        }
+        int value = current.next.data;
+        current.next = null;
+        return value;
+    }
+    
+    // 7. Xóa nút sau nút p và trả về giá trị của nó
+    int deleteAfter(Node p) {
+        if (p == null || p.next == null) {
+            return -1;
+        }
+        int value = p.next.data;
+        p.next = p.next.next;
+        return value;
+    }
+    
+    // 8. Xóa nút đầu tiên có giá trị bằng x
+    void deleteNode(int x) {
+        if (head == null) {
+            return;
+        }
+        if (head.data == x) {
+            head = head.next;
+            return;
+        }
+        Node current = head;
+        while (current.next != null) {
+            if (current.next.data == x) {
+                current.next = current.next.next;
+                return;
+            }
+            current = current.next;
+        }
+    }
+    
+    // 9. Tìm kiếm nút có giá trị x
+    Node search(int x) {
+        Node current = head;
+        while (current != null) {
+            if (current.data == x) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+    
+    // 10. Đếm số lượng nút trong danh sách
+    int count() {
+        int count = 0;
+        Node current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+    
+    // 11. Xóa nút thứ i
+    void deleteNode(int i) {
+        if (head == null) {
+            return;
+        }
+        if (i == 0) {
+            head = head.next;
+            return;
+        }
+        Node current = head;
+        for (int j = 0; j < i - 1 && current.next != null; j++) {
+            current = current.next;
+        }
+        if (current.next == null) {
+            return;
+        }
+        current.next = current.next.next;
+    }
+    
+    // 12. Sắp xếp danh sách theo thứ tự tăng dần
+    void sort() {
+        if (head == null || head.next == null) {
+            return;
+        }
+        Node current = head;
+        while (current != null) {
+            Node min = current;
+            Node runner = current.next;
+            while (runner != null) {
+                if (runner.data < min.data) {
+                    min = runner;
+                }
+                runner = runner.next;
+            }
+            int temp = current.data;
+            current.data = min.data;
+            min.data = temp;
+            current = current.next;
+        }
+    }
+    
+    // 13. Xóa nút p
+    void deleteNode(Node p) {
+        if (head == null || p == null) {
+            return;
+        }
+        if (head == p) {
+            head = head.next;
+            return;
+        }
+        Node current = head;
+        while (current.next != null) {
+            if (current.next == p) {
+                current.next = current.next.next;
+                return;
+            }
+            current = current.next;
+        }
+    }
+    
+    // 14. Chuyển danh sách thành mảng
+    int[] toArray() {
+        int[] arr = new int[count()];
+        Node current = head;
+        int i = 0;
+        while (current != null) {
+            arr[i++] = current.data;
+            current = current.next;
+        }
+        return arr;
+    }
+    
+    // 15. Hợp nhất hai danh sách đã sắp xếp
+    static LinkedList merge(LinkedList list1, LinkedList list2) {
+        LinkedList result = new LinkedList();
+        Node p1 = list1.head;
+        Node p2 = list2.head;
+        while (p1 != null && p2 != null) {
+            if (p1.data < p2.data) {
+                result.addToTail(p1.data);
+                p1 = p1.next;
+            } else {
+                result.addToTail(p2.data);
+                p2 = p2.next;
+            }
+        }
+        while (p1 != null) {
+            result.addToTail(p1.data);
+            p1 = p1.next;
+        }
+        while (p2 != null) {
+            result.addToTail(p2.data);
+            p2 = p2.next;
+        }
+        return result;
+    }
+    
+    // 16. Thêm nút vào trước nút p
+    void addBefore(Node p, int x) {
+        if (p == null || head == null) {
+            return;
+        }
+        if (head == p) {
+            addToHead(x);
+            return;
+        }
+        Node current = head;
+        while (current.next != null) {
+            if (current.next == p) {
+                Node newNode = new Node(x);
+                newNode.next = p;
