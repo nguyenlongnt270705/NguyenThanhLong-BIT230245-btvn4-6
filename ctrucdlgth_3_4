@@ -1,0 +1,28 @@
+// bài 3
+2 3 5 3
+// giải thích
+- Khởi tạo 3 biến x, y, và z với các giá trị tương ứng là 3, 5 và 2.
+- Tạo mới một ngăn xếp s và gọi phương thức makeEmpty() để đảm bảo rằng ngăn xếp này là rỗng.
+- Đẩy giá trị của biến x = 3 vào đỉnh của ngăn xếp s; đẩy số 4 vào đỉnh của ngăn xếp, gọi phương thức pop() để loại bỏ phần tử ở đỉnh của ngăn xếp (4).
+- Đẩy giá trị của biến y = 5 vào đỉnh của ngăn xếp s, đẩy số 3 vào đỉnh của ngăn xếp, đẩy giá trị của biến z = 2 vào đỉnh của ngăn xếp.
+- Gọi phương thức pop() để loại bỏ phần tử ở đỉnh của ngăn xếp (2), đẩy số 2 vào đỉnh của ngăn xếp, đẩy giá trị của biến x =3  vào đỉnh của ngăn xếp.
+- Sử dụng một vòng lặp while để kiểm tra xem ngăn xếp s có rỗng hay không. Nếu không rỗng, gọi phương thức pop() để lấy ra phần tử ở đỉnh của ngăn xếp và in nó ra màn hình, nếu rỗng thì điều kiện !s.isEmpty() sẽ sai vì ngăn xếp lúc này rỗng, và vòng lặp sẽ không được thực thi, không có giá trị nào được in ra.
+
+
+// bài 4
+1
+4
+x = 4
+y = 1
+// giải thích
+- Khai báo và gán giá trị 3 cho biến x, và giá trị 1 cho biến y.
+- Tạo một ngăn xếp rỗng mới.
+- Đẩy giá trị 5 và 7 vào trong ngăn xếp, loại bỏ phần tử ở đỉnh ngăn xếp là 7.
+- x += y <=> x = x+y <=> x= 4
+- Loại bỏ phần tử ở đỉnh ngăn xếp là 5.
+- Đẩy giá trị của x mới và y vào trong ngăn xếp ( x=4, y=1), đẩy 2 vào ngăn xếp, loại bỏ giá trị ở đỉnh ngăn xếp là 2, loại bỏ giá trị ở đỉnh là 1.
+- Điều kiện vòng lặp: while (! s.isEmpty( )) - Kiểm tra xem ngăn xếp s có rỗng không. Nếu ngăn xếp không rỗng (nghĩa là ! s.isEmpty() là true), thì sẽ vào trong vòng lặp.
+- Lấy phần tử khỏi ngăn xếp: y = s.pop() - Lấy phần tử ở đỉnh của ngăn xếp và gán giá trị đó cho biến y. Khi s.pop() được gọi, thì phần tử ở đỉnh sẽ bị loại bỏ khỏi ngăn xếp.
+- In giá trị của y: System.out.println(y) - In ra giá trị của biến y (là giá trị của phần tử vừa bị loại bỏ khỏi ngăn xếp).
+- Lặp lại: Vòng lặp while sẽ tiếp tục chạy cho đến khi ngăn xếp s trở nên rỗng (tức là ! s.isEmpty() trở thành false). Mỗi lần lặp, sẽ lấy một phần tử khỏi đỉnh ngăn xếp và in ra giá trị của nó.
+- In ra giá trị cuối cùng của x và y là 4 và 1.
