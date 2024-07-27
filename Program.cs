@@ -1,21 +1,33 @@
-﻿class Program
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+
+namespace db_student
 {
-    static void Main(string[] args)
+    class Program
     {
-        Person obs = new Student { Name = "Nguyễn Văn Nam", Major = "ICT" };
-
-        // Kiểm tra obs là Student hay không
-        if (obs is Student)
+        static void Main(string[] args)
         {
-            // Gọi phương thức kpi()
-            ((Student)obs).kpi();
-        }
-        else
-        {
-            Console.WriteLine("obs is not a Student object.");
-        }
+            Console.OutputEncoding = System.Text.Encoding.UTF8; // set encoding UTF-8 cho Console
+            String connectionString = "Server=DESKTOP-D9JM063\\SQLEXPRESS;Database=CMCUNI;User ID=sa;Password=cmcuni;";
 
-        // Nếu Name và Major không hỗ trợ get, set
-        // Sẽ xảy ra lỗi khi biên dịch vì các thuộc tính sẽ không thể truy cập được.
-    }
-}
+            List<Student> list_sv = null;
+            SqlConnection connection = null;
+            connection = db_lib.MoKetNoi(connectionString);
+            if (connection == null)
+                Console.WriteLine("Không kết nối được CSDL với xâu kết nối là:" + connectionString);
+            else
+            {
+                //Gọi hàm đọc thông tin sinh viên
+                list_sv = db_lib.DocSinhvien(connection);
+                // Hiển thị danh sách sinh viên
+                for (int i = 0; i < list_sv.Count; i++)
+                    Console.WriteLine(list_sv[i].StudentID + "," + list_sv[i].FirstName + "," + list_sv[i].LastName + "," + list_sv[i].Age + "," + list_sv[i].Gender);
+            }//else
+
+            //////////////////////////////
+        }// Main
+    }//Program
+}//db_student
